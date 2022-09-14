@@ -72,12 +72,12 @@ namespace HelloAutoCAD
                         entity.AcadObject.ToString()));
                     try
                     {
-                        BlockReference blockReference = (BlockReference)entity;
+                        BlockReference blockReference = (BlockReference)entity;        //Выводит в командную строку автокада
                         adoc.Editor.WriteMessage(string.Format("\n БЛОК АЙДИ:{0};\n" +
                                                                  "\nТИП:{1}; \n" +
                                                                  "\nНОРМАЛЬ {2};\n" +
                                                                  "\nЮНИТ ФАКТОР: {3}\n" +
-                                                                 "\nСКАЛЯРНЫЕ ФАКТОРЫ {4}\n" +
+                                                                 "\nСКАЛЯРНЫЕ ФАКТОРЫ {4}\n" + // Вроде бы отличается у элементов повёрнутых на PI/2 (но это не точно)
                                                                  "\nECS {5}\n" +
                                                                  "\nГЕОМЕТРИЧЕСКИЕ РАСШИРЕНИЯ\n",
                             blockReference.BlockId.ToString(),
