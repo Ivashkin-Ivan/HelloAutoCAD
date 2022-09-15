@@ -79,7 +79,7 @@ namespace HelloAutoCAD
                                                                  "\nЮНИТ ФАКТОР: {3}\n" +
                                                                  "\nСКАЛЯРНЫЕ ФАКТОРЫ {4}\n" + // Вроде бы отличается у элементов повёрнутых на PI/2 (но это не точно)
                                                                  "\nECS {5}\n" +
-                                                                 "\nГЕОМЕТРИЧЕСКИЕ РАСШИРЕНИЯ\n",
+                                                                 "\nГЕОМЕТРИЧЕСКИЕ РАСШИРЕНИЯ {6}\n",
                             blockReference.BlockId.ToString(),
                             blockReference.BlockName.ToString(),
                             blockReference.Normal.ToString(),
