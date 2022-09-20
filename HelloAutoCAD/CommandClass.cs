@@ -66,27 +66,45 @@ namespace HelloAutoCAD
                     Entity entity = (Entity)tr.GetObject(id, OpenMode.ForRead);
 
                     // выводим в консоль слой (entity.Layer), тип (entity.GetType().ToString()) и цвет (entity.Color) каждого объекта
-                    adoc.Editor.WriteMessage(string.Format("\nLayer:{0}; Type:{1}; Еще что-то {2}\n",
+                    /*adoc.Editor.WriteMessage(string.Format("\nLayer:{0}; Type:{1}; Еще что-то {2}\n",
                         entity.Layer,
                         entity.GetType().ToString(),
-                        entity.AcadObject.ToString()));
+                        entity.AcadObject.ToString()));*/
                     try
                     {
                         BlockReference blockReference = (BlockReference)entity;        //Выводит в командную строку автокада
-                        adoc.Editor.WriteMessage(string.Format("\n БЛОК АЙДИ:{0};\n" +
-                                                                 "\nТИП:{1}; \n" +
-                                                                 "\nНОРМАЛЬ {2};\n" +
-                                                                 "\nЮНИТ ФАКТОР: {3}\n" +
-                                                                 "\nСКАЛЯРНЫЕ ФАКТОРЫ {4}\n" + // Вроде бы отличается у элементов повёрнутых на PI/2 (но это не точно)
-                                                                 "\nECS {5}\n" +
-                                                                 "\nГЕОМЕТРИЧЕСКИЕ РАСШИРЕНИЯ {6}\n",
+                        DynamicBlockReferencePropertyCollection props = blockReference.DynamicBlockReferencePropertyCollection;
+                        string prop = null;
+                        foreach(DynamicBlockReferenceProperty p in props)
+                        {
+                            prop += p.PropertyName + p.Value.ToString() + "\n";
+                        }
+
+                        adoc.Editor.WriteMessage(string.Format("\nБЛОК АЙДИ:{0};\n" +
+                                                               "\nТИП:{1}; \n" +
+                                                               "\nНОРМАЛЬ {2};\n" +
+                                                               "\nЮНИТ ФАКТОР: {3}\n" +
+                                                               "\nСКАЛЯРНЫЕ ФАКТОРЫ {4}\n" + // Вроде бы отличается у элементов повёрнутых на PI/2 (но это не точно)
+                                                               "\nECS {5}\n" +
+                                                               "\nГЕОМЕТРИЧЕСКИЕ РАСШИРЕНИЯ {6}\n" +
+                                                               "\nВИЗИБЛ {7}\n" +
+                                                               "\nВИЗИБЛ СТАЙЛ АЙДИ {8}\n" +
+                                                               "\nТРАНСФОРМ {9}\n" +
+                                                               "\nИМЯ {10}\n" +
+                                                               "\nСВОЙСТВА {11}\n" +
+                                                               "\n.............................\n",
                             blockReference.BlockId.ToString(),
                             blockReference.BlockName.ToString(),
-                            blockReference.Normal.ToString(),
-                            blockReference.UnitFactor.ToString(),
-                            blockReference.ScaleFactors.ToString(),
-                            blockReference.Ecs.ToString(),
-                            blockReference.GeometricExtents.ToString()
+                            "0",//blockReference.Normal.ToString(),
+                            "0",//blockReference.UnitFactor.ToString(),
+                            "0",//blockReference.ScaleFactors.ToString(),
+                            "0",//blockReference.Ecs.ToString(),
+                            "0",//blockReference.GeometricExtents.ToString(),
+                            blockReference.Visible.ToString(),
+                            blockReference.VisualStyleId.ToString(),
+                            blockReference.BlockTransform.ToString(),
+                            blockReference.Name.ToString(),
+                            prop
                             ));
                     }
                     catch
